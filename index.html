@@ -41,8 +41,17 @@
 
             <!-- OX 버튼 -->
             <div class="ox-buttons" id="oxButtons">
-                <button class="ox-btn o" onclick="checkAnswer(1)">O</button>
-                <button class="ox-btn x" onclick="checkAnswer(2)">X</button>
+                <button class="ox-btn o" onclick="checkAnswer(1)">
+                    <svg viewBox="0 0 100 100" width="80" height="80">
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="12"/>
+                    </svg>
+                </button>
+                <button class="ox-btn x" onclick="checkAnswer(2)">
+                    <svg viewBox="0 0 100 100" width="80" height="80">
+                        <line x1="20" y1="20" x2="80" y2="80" stroke="white" stroke-width="12" stroke-linecap="round"/>
+                        <line x1="80" y1="20" x2="20" y2="80" stroke="white" stroke-width="12" stroke-linecap="round"/>
+                    </svg>
+                </button>
             </div>
 
             <!-- 객관식 버튼 -->
