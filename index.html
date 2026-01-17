@@ -93,7 +93,10 @@
                 </div>
             </div>
 
-            <button class="restart-btn" onclick="restartQuiz()">다시 도전하기! 🔄</button>
+            <div class="result-buttons">
+                <button class="restart-btn" onclick="restartQuiz()">처음부터 다시! 🔄</button>
+                <button class="retry-wrong-btn" id="retryWrongBtn" onclick="retryWrongQuestions()">틀린 문제 다시 풀기 📝</button>
+            </div>
         </div>
     </div>
 

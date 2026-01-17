@@ -8,6 +8,7 @@ let score = 0;
 let correctAnswers = 0;
 let wrongAnswers = 0;
 let isAnswering = false;
+let wrongQuestionsList = []; // 틀린 문제 목록
 
 // 오디오 컨텍스트 (효과음용)
 let audioContext;
@@ -90,6 +91,7 @@ function startQuiz() {
     score = 0;
     correctAnswers = 0;
     wrongAnswers = 0;
+    wrongQuestionsList = []; // 틀린 문제 목록 초기화
 
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('quizScreen').style.display = 'block';
@@ -189,6 +191,7 @@ function checkAnswer(userAnswer) {
         playSound('correct');
     } else {
         wrongAnswers++;
+        wrongQuestionsList.push(question); // 틀린 문제 저장
 
         overlay.className = 'feedback-overlay wrong';
         emoji.textContent = ['😢', '💪', '🤔'][Math.floor(Math.random() * 3)];
@@ -247,12 +250,41 @@ function showResult() {
     document.getElementById('resultEmoji').textContent = emoji;
     document.getElementById('resultMessage').textContent = message;
 
+    // 틀린 문제가 없으면 버튼 숨기기
+    const retryBtn = document.getElementById('retryWrongBtn');
+    if (wrongQuestionsList.length === 0) {
+        retryBtn.style.display = 'none';
+    } else {
+        retryBtn.style.display = 'inline-block';
+        retryBtn.textContent = `틀린 문제 다시 풀기 (${wrongQuestionsList.length}문제) 📝`;
+    }
+
     playFanfare();
 }
 
 function restartQuiz() {
     document.getElementById('resultScreen').style.display = 'none';
     document.getElementById('startScreen').style.display = 'block';
+}
+
+function retryWrongQuestions() {
+    if (wrongQuestionsList.length === 0) return;
+
+    // 틀린 문제들을 OX와 객관식으로 분리 후 섞기
+    const oxQuestions = wrongQuestionsList.filter(q => q.type === 'OX');
+    const multipleQuestions = wrongQuestionsList.filter(q => q.type === 'MULTIPLE');
+    shuffledQuestions = [...shuffleArray(oxQuestions), ...shuffleArray(multipleQuestions)];
+
+    currentIndex = 0;
+    score = 0;
+    correctAnswers = 0;
+    wrongAnswers = 0;
+    wrongQuestionsList = []; // 틀린 문제 목록 초기화
+
+    document.getElementById('resultScreen').style.display = 'none';
+    document.getElementById('quizScreen').style.display = 'block';
+
+    showQuestion();
 }
 
 // JSON 파일 로드
