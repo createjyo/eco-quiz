@@ -115,6 +115,10 @@ function showQuestion() {
     // 문제 텍스트
     document.getElementById('questionText').textContent = question.question;
 
+    // 모든 버튼 selected 클래스 리셋
+    document.querySelectorAll('.ox-btn').forEach(btn => btn.classList.remove('selected'));
+    document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+
     // 버튼 표시 전환
     if (question.type === 'OX') {
         document.getElementById('oxButtons').style.display = 'flex';
@@ -137,6 +141,17 @@ function checkAnswer(userAnswer) {
 
     const question = shuffledQuestions[currentIndex];
     const isCorrect = userAnswer === question.answer;
+
+    // 클릭한 버튼에 selected 클래스 추가
+    if (question.type === 'OX') {
+        const oxBtns = document.querySelectorAll('.ox-btn');
+        oxBtns.forEach(btn => btn.classList.remove('selected'));
+        oxBtns[userAnswer - 1].classList.add('selected');
+    } else {
+        const optionBtns = document.querySelectorAll('.option-btn');
+        optionBtns.forEach(btn => btn.classList.remove('selected'));
+        optionBtns[userAnswer - 1].classList.add('selected');
+    }
 
     const overlay = document.getElementById('feedbackOverlay');
     const emoji = document.getElementById('feedbackEmoji');

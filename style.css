@@ -169,11 +169,15 @@ body {
     box-shadow: 0 10px 30px rgba(244, 67, 54, 0.4);
 }
 
-.ox-btn:hover {
-    transform: scale(1.1);
+/* PC에서만 hover 효과 */
+@media (hover: hover) and (pointer: fine) {
+    .ox-btn:hover {
+        transform: scale(1.1);
+    }
 }
 
-.ox-btn:active {
+.ox-btn:active,
+.ox-btn.selected {
     transform: scale(0.95);
 }
 
@@ -197,13 +201,19 @@ body {
     color: #333;
 }
 
-.option-btn:hover {
-    border-color: #4CAF50;
-    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-    transform: scale(1.02);
+/* PC에서만 hover 효과 */
+@media (hover: hover) and (pointer: fine) {
+    .option-btn:hover {
+        border-color: #4CAF50;
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        transform: scale(1.02);
+    }
 }
 
-.option-btn:active {
+.option-btn:active,
+.option-btn.selected {
+    border-color: #4CAF50;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
     transform: scale(0.98);
 }
 
