@@ -9,6 +9,8 @@ let correctAnswers = 0;
 let wrongAnswers = 0;
 let isAnswering = false;
 let wrongQuestionsList = []; // 틀린 문제 목록
+let isSpeechEnabled = true;
+let speechToggleBtn = null;
 
 // 오디오 컨텍스트 (효과음용)
 let audioContext;
@@ -67,6 +69,56 @@ function playFanfare() {
     });
 }
 
+function buildSpeechText(question) {
+    let text = question.question;
+
+    if (question.type === 'MULTIPLE' && Array.isArray(question.options)) {
+        const options = question.options.map((option, index) => `${index + 1}번 ${option}`);
+        text += `. 보기: ${options.join(', ')}`;
+    }
+
+    return text;
+}
+
+function speakQuestion(question) {
+    if (!isSpeechEnabled || !('speechSynthesis' in window)) return;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(buildSpeechText(question));
+    utterance.lang = 'ko-KR';
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    window.speechSynthesis.speak(utterance);
+}
+
+function updateSpeechToggleUI() {
+    if (!speechToggleBtn) return;
+
+    if (isSpeechEnabled) {
+        speechToggleBtn.textContent = '🔊 읽기 ON';
+        speechToggleBtn.classList.remove('off');
+        speechToggleBtn.setAttribute('aria-pressed', 'true');
+    } else {
+        speechToggleBtn.textContent = '🔈 읽기 OFF';
+        speechToggleBtn.classList.add('off');
+        speechToggleBtn.setAttribute('aria-pressed', 'false');
+    }
+}
+
+function toggleSpeech() {
+    isSpeechEnabled = !isSpeechEnabled;
+    if (!isSpeechEnabled && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+    updateSpeechToggleUI();
+
+    const quizScreen = document.getElementById('quizScreen');
+    if (isSpeechEnabled && quizScreen && quizScreen.style.display === 'block') {
+        const question = shuffledQuestions[currentIndex];
+        if (question) speakQuestion(question);
+    }
+}
+
 // 배열 섞기 (Fisher-Yates 알고리즘)
 function shuffleArray(array) {
     const shuffled = [...array];
@@ -116,6 +168,7 @@ function showQuestion() {
 
     // 문제 텍스트
     document.getElementById('questionText').textContent = question.question;
+    speakQuestion(question);
 
     // 모든 버튼 selected 클래스 리셋
     document.querySelectorAll('.ox-btn').forEach(btn => btn.classList.remove('selected'));
@@ -311,5 +364,20 @@ async function loadQuizData() {
     }
 }
 
-// 페이지 로드 시 퀴즈 데이터 로드
-window.addEventListener('DOMContentLoaded', loadQuizData);
+// 페이지 로드 시 초기화
+window.addEventListener('DOMContentLoaded', () => {
+    speechToggleBtn = document.getElementById('speechToggle');
+    if (speechToggleBtn) {
+        if (!('speechSynthesis' in window)) {
+            speechToggleBtn.textContent = '읽기 미지원';
+            speechToggleBtn.classList.add('off');
+            speechToggleBtn.setAttribute('aria-pressed', 'false');
+            speechToggleBtn.disabled = true;
+        } else {
+            speechToggleBtn.addEventListener('click', toggleSpeech);
+            updateSpeechToggleUI();
+        }
+    }
+
+    loadQuizData();
+});
