@@ -2,156 +2,237 @@
   "title": "2025 환경골든벨 기출문제",
   "total": 30,
   "questions": [
-    { "id": 1, "type": "OX", "question": "우유팩은 종이에 버려도 된다?", "answer": 2 },
-    { "id": 2, "type": "OX", "question": "빨대는 플라스틱으로 버린다?", "answer": 2 },
-    { "id": 3, "type": "OX", "question": "먹다가 남긴 밥은 음식물 쓰레기이다?", "answer": 1 },
-    { "id": 4, "type": "OX", "question": "급식을 먹을 만큼만 받는 것도 환경보호이다?", "answer": 1 },
-    { "id": 5, "type": "OX", "question": "물을 아끼면 강과 바다가 깨끗해진다?", "answer": 1 },
-    { "id": 6, "type": "OX", "question": "에어컨을 세게 틀면 환경에 좋다?", "answer": 2 },
-    { "id": 7, "type": "OX", "question": "재활용은 쓰레기를 줄이는 방법이다?", "answer": 1 },
-    { "id": 8, "type": "OX", "question": "검은 비닐봉지는 재활용이 잘 된다?", "answer": 2 },
-    { "id": 9, "type": "OX", "question": "재활용 표시가 있으면 씻지 않아도 된다?", "answer": 2 },
-    { "id": 10, "type": "OX", "question": "음식이 묻은 비닐은 재활용이 안 된다?", "answer": 1 },
+    {
+      "id": 1,
+      "type": "OX",
+      "question": "우유팩은 종이에 버려도 된다?",
+      "answer": 2,
+      "hint": "우유팩은 그냥 종이가 아니라 안에 반짝이는 막이 있어요."
+    },
+    {
+      "id": 2,
+      "type": "OX",
+      "question": "빨대는 플라스틱으로 버린다?",
+      "answer": 2,
+      "hint": "빨대는 아주 작아서 재활용하기 어려워요."
+    },
+    {
+      "id": 3,
+      "type": "OX",
+      "question": "먹다가 남긴 밥은 음식물 쓰레기이다?",
+      "answer": 1,
+      "hint": "밥은 원래 사람이 먹는 음식이에요."
+    },
+    {
+      "id": 4,
+      "type": "OX",
+      "question": "급식을 먹을 만큼만 받는 것도 환경보호이다?",
+      "answer": 1,
+      "hint": "음식을 남기지 않으면 쓰레기가 줄어요."
+    },
+    {
+      "id": 5,
+      "type": "OX",
+      "question": "물을 아끼면 강과 바다가 깨끗해진다?",
+      "answer": 1,
+      "hint": "우리가 쓰는 물은 강과 바다에서 와요."
+    },
+    {
+      "id": 6,
+      "type": "OX",
+      "question": "에어컨을 세게 틀면 환경에 좋다?",
+      "answer": 2,
+      "hint": "전기를 많이 쓰면 지구가 힘들어해요."
+    },
+    {
+      "id": 7,
+      "type": "OX",
+      "question": "재활용은 쓰레기를 줄이는 방법이다?",
+      "answer": 1,
+      "hint": "같은 물건을 다시 쓰면 쓰레기가 줄어요."
+    },
+    {
+      "id": 8,
+      "type": "OX",
+      "question": "검은 비닐봉지는 재활용이 잘 된다?",
+      "answer": 2,
+      "hint": "색이 진한 비닐은 다시 쓰기 어려워요."
+    },
+    {
+      "id": 9,
+      "type": "OX",
+      "question": "재활용 표시가 있으면 씻지 않아도 된다?",
+      "answer": 2,
+      "hint": "더러운 것은 다시 쓰기 힘들어요."
+    },
+    {
+      "id": 10,
+      "type": "OX",
+      "question": "음식이 묻은 비닐은 재활용이 안 된다?",
+      "answer": 1,
+      "hint": "음식이 묻으면 다른 재활용도 망가져요."
+    },
 
     {
       "id": 11,
       "type": "MULTIPLE",
       "question": "재활용이 어려운 것은 무엇일까요?",
       "options": ["씻은 페트병", "라벨 뗀 플라스틱 병", "빨대", "행군 캔"],
-      "answer": 3
+      "answer": 3,
+      "hint": "너무 작고 얇은 것은 다시 쓰기 힘들어요."
     },
     {
       "id": 12,
       "type": "MULTIPLE",
       "question": "음식물 쓰레기로 버리면 안 되는 것은?",
       "options": ["생선 뼈", "남은 반찬", "밥", "과일 껍질"],
-      "answer": 1
+      "answer": 1,
+      "hint": "딱딱해서 동물도 먹기 힘든 것을 생각해요."
     },
     {
       "id": 13,
       "type": "MULTIPLE",
       "question": "환경을 지키는 행동은 무엇일까요?",
       "options": ["필요없는 물건 미리 사기", "음식 남기기", "먹을 만큼만 받기", "불 켜 놓고 나가기"],
-      "answer": 3
+      "answer": 3,
+      "hint": "음식을 남기지 않는 행동을 찾아보세요."
     },
     {
       "id": 14,
       "type": "MULTIPLE",
       "question": "물을 아끼면 좋은 점은 무엇일까요?",
       "options": ["씻기 불편해진다", "물이 더러워진다", "아무 변화가 없다", "강과 바다가 지켜진다"],
-      "answer": 4
+      "answer": 4,
+      "hint": "물은 바다와 강으로 다시 가요."
     },
     {
       "id": 15,
       "type": "MULTIPLE",
       "question": "재활용 전에 꼭 해야하는 것은 무엇일까요?",
       "options": ["그냥 버리기", "찢어서 버리기", "깨끗이 씻기", "음식물과 함께 버리기"],
-      "answer": 3
+      "answer": 3,
+      "hint": "깨끗해야 다시 사용할 수 있어요."
     },
     {
       "id": 16,
       "type": "MULTIPLE",
       "question": "환경 보호는 언제부터 해야 할까요?",
       "options": ["어른이 되면", "지금 바로", "시간이 있을 때", "초등학교에 가면"],
-      "answer": 2
+      "answer": 2,
+      "hint": "지금 할 수 있는 것이 가장 빨라요."
     },
     {
       "id": 17,
       "type": "MULTIPLE",
       "question": "환경 보호와 가장 가까운 물건은 무엇일까요?",
       "options": ["비닐봉지", "종이컵", "일회용 빨대", "텀블러"],
-      "answer": 4
+      "answer": 4,
+      "hint": "여러 번 다시 쓸 수 있는 물건이에요."
     },
     {
       "id": 18,
       "type": "MULTIPLE",
       "question": "쓰레기를 줄이는 방법은 무엇일까요?",
       "options": ["물건 오래 쓰기", "더 많이 사기", "자주 버리기", "새 것으로 바꾸기"],
-      "answer": 1
+      "answer": 1,
+      "hint": "고장 나지 않았으면 계속 써요."
     },
     {
       "id": 19,
       "type": "MULTIPLE",
       "question": "플라스틱으로 버려야하는 것은?",
       "options": ["깨진 거울", "종이상자", "페트병", "기저귀"],
-      "answer": 3
+      "answer": 3,
+      "hint": "물 마실 때 자주 쓰는 투명한 병이에요."
     },
     {
       "id": 20,
       "type": "MULTIPLE",
       "question": "유리로 버려야하는 것은?",
       "options": ["플라스틱 컵", "우유팩", "비닐장갑", "유리병"],
-      "answer": 4
+      "answer": 4,
+      "hint": "깨지면 위험한 단단한 병이에요."
     },
     {
       "id": 21,
       "type": "MULTIPLE",
       "question": "종이류로 버려야하는 것은?",
       "options": ["기름 묻은 종이", "신문지", "빨대", "깨진 도자기"],
-      "answer": 2
+      "answer": 2,
+      "hint": "글자가 가득 적혀 있는 종이를 생각해요."
     },
+
     {
       "id": 22,
       "type": "MULTIPLE",
       "question": "일반 쓰레기로 버려야 하는 것은?",
       "options": ["캔", "페트병", "종이팩", "깨진 거울"],
-      "answer": 4
+      "answer": 4,
+      "hint": "다치기 쉬운 것은 재활용이 안 돼요."
     },
     {
       "id": 23,
       "type": "MULTIPLE",
       "question": "음식물 쓰레기로 버려야 하는 것은?",
       "options": ["생선 뼈", "밥", "계란 껍질", "과일 씨앗"],
-      "answer": 2
+      "answer": 2,
+      "hint": "사람이 먹는 음식이었는지 생각해요."
     },
     {
       "id": 24,
       "type": "MULTIPLE",
       "question": "양치할 때 물을 아끼는 방법은?",
       "options": ["물을 계속 틀어 둔다", "컵에 물을 받아 사용한다", "더 오래 틀어 둔다", "물놀이를 한다"],
-      "answer": 2
+      "answer": 2,
+      "hint": "필요한 만큼만 물을 써요."
     },
     {
       "id": 25,
       "type": "MULTIPLE",
       "question": "재활용이 가능한 것은 무엇일까요?",
       "options": ["음식물", "종이", "나뭇잎", "흙"],
-      "answer": 2
+      "answer": 2,
+      "hint": "책이나 상자를 떠올려 보세요."
     },
     {
       "id": 26,
       "type": "MULTIPLE",
       "question": "비닐봉지를 줄이는 방법은?",
       "options": ["더 많이 쓴다", "장바구니를 사용한다", "버린다", "찢는다"],
-      "answer": 2
+      "answer": 2,
+      "hint": "시장 갈 때 들고 가는 가방이에요."
     },
     {
       "id": 27,
       "type": "MULTIPLE",
       "question": "다음 중 환경 보호 활동은?",
       "options": ["쓰담 걷기", "쓰레기 버리기", "나무 베기", "물 낭비"],
-      "answer": 1
+      "answer": 1,
+      "hint": "걸으면서 쓰레기를 줍는 활동이에요."
     },
     {
       "id": 28,
       "type": "MULTIPLE",
       "question": "다음 중 재활용이 어려운 것은?",
       "options": ["플라스틱 병", "유리병", "종이", "음식물"],
-      "answer": 4
+      "answer": 4,
+      "hint": "썩는 것은 재활용 공장에 가지 않아요."
     },
     {
       "id": 29,
       "type": "MULTIPLE",
       "question": "지구를 보호하는 날은?",
       "options": ["어린이날", "지구의 날", "설날", "크리스마스"],
-      "answer": 2
+      "answer": 2,
+      "hint": "지구를 위해 특별히 만든 날이에요."
     },
     {
       "id": 30,
       "type": "MULTIPLE",
       "question": "환경을 보호하는 이유는?",
       "options": ["놀기 위해", "지구를 지키기 위해", "귀찮아서", "혼나지 않으려고"],
-      "answer": 2
+      "answer": 2,
+      "hint": "우리가 살고 있는 집 같은 곳이에요."
     }
   ]
 }

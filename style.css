@@ -137,6 +137,57 @@ body {
     justify-content: center;
 }
 
+/* 힌트 영역 */
+.hint-area {
+    margin-bottom: 20px;
+}
+
+.hint-btn {
+    background: linear-gradient(135deg, #FFD54F, #FFC107);
+    color: #333;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-family: inherit;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .hint-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(255, 193, 7, 0.5);
+    }
+}
+
+.hint-btn:active {
+    transform: scale(0.95);
+}
+
+.hint-btn:disabled {
+    background: #ccc;
+    box-shadow: none;
+    cursor: default;
+    transform: none;
+}
+
+.hint-text {
+    margin-top: 15px;
+    padding: 15px 20px;
+    background: #FFF8E1;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    color: #F57C00;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.hint-text.show {
+    display: block;
+}
+
 /* OX 버튼 */
 .ox-buttons {
     display: flex;
