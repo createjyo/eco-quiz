@@ -9,7 +9,7 @@
 body {
     font-family: 'Jua', 'Noto Sans KR', sans-serif;
     background: linear-gradient(135deg, #a8e6cf 0%, #88d8b0 50%, #7fcdbb 100%);
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
