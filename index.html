@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 환경드림 퀴즈</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Jua', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8b0 50%, #7fcdbb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 시작 화면 */
+        .start-screen {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .start-screen h1 {
+            font-size: 2.5rem;
+            color: #2d5a3d;
+            margin-bottom: 20px;
+        }
+
+        .start-screen .emoji {
+            font-size: 80px;
+            margin: 30px 0;
+            animation: bounce 2s infinite;
+        }
+
+        .start-screen p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.8rem;
+            font-family: inherit;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.5);
+        }
+
+        /* 퀴즈 화면 */
+        .quiz-screen {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 20px;
+            height: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        .question-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .question-number {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .score {
+            background: #FF9800;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .question-type {
+            background: #2196F3;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .question-text {
+            font-size: 1.8rem;
+            color: #333;
+            margin: 30px 0;
+            line-height: 1.5;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* OX 버튼 */
+        .ox-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .ox-btn {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: none;
+            font-size: 4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-family: inherit;
+        }
+
+        .ox-btn.o {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        .ox-btn.x {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+            box-shadow: 0 10px 30px rgba(244, 67, 54, 0.4);
+        }
+
+        .ox-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .ox-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* 객관식 버튼 */
+        .multiple-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .option-btn {
+            background: linear-gradient(135deg, #fff, #f5f5f5);
+            border: 3px solid #ddd;
+            padding: 25px 20px;
+            font-size: 1.3rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            color: #333;
+        }
+
+        .option-btn:hover {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            transform: scale(1.02);
+        }
+
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+
+        .option-btn .option-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            line-height: 35px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* 피드백 오버레이 */
+        .feedback-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .feedback-overlay.correct {
+            background: rgba(76, 175, 80, 0.9);
+        }
+
+        .feedback-overlay.wrong {
+            background: rgba(244, 67, 54, 0.9);
+        }
+
+        .feedback-content {
+            text-align: center;
+            color: white;
+        }
+
+        .feedback-emoji {
+            font-size: 120px;
+            animation: popIn 0.5s ease;
+        }
+
+        .feedback-text {
+            font-size: 2.5rem;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .feedback-answer {
+            font-size: 1.3rem;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+
+        /* 결과 화면 */
+        .result-screen {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-screen h2 {
+            font-size: 2.2rem;
+            color: #2d5a3d;
+            margin-bottom: 20px;
+        }
+
+        .result-emoji {
+            font-size: 100px;
+            margin: 20px 0;
+        }
+
+        .result-score {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+
+        .result-message {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            background: #f5f5f5;
+            padding: 20px 30px;
+            border-radius: 15px;
+        }
+
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .stat-box.correct .number { color: #4CAF50; }
+        .stat-box.wrong .number { color: #f44336; }
+
+        .stat-box .label {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            font-family: inherit;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.4);
+        }
+
+        .restart-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* 애니메이션 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease;
+        }
+
+        /* 반응형 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .question-text {
+                font-size: 1.4rem;
+            }
+
+            .ox-btn {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .multiple-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .option-btn {
+                font-size: 1.1rem;
+            }
+
+            .result-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 시작 화면 -->
+        <div class="start-screen" id="startScreen">
+            <h1>2025 환경드림 퀴즈</h1>
+            <div class="emoji">🌍🌱</div>
+            <p>환경을 지키는 방법을 배워볼까요?<br>총 30문제가 준비되어 있어요!</p>
+            <button class="start-btn" onclick="startQuiz()">시작하기! 🚀</button>
+        </div>
+
+        <!-- 퀴즈 화면 -->
+        <div class="quiz-screen" id="quizScreen">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="question-info">
+                <span class="question-number" id="questionNumber">1 / 30</span>
+                <span class="score" id="scoreDisplay">점수: 0</span>
+            </div>
+
+            <div class="question-type" id="questionType">OX 퀴즈</div>
+
+            <div class="question-text" id="questionText">
+                문제가 여기에 표시됩니다.
+            </div>
+
+            <!-- OX 버튼 -->
+            <div class="ox-buttons" id="oxButtons">
+                <button class="ox-btn o" onclick="checkAnswer('O')">O</button>
+                <button class="ox-btn x" onclick="checkAnswer('X')">X</button>
+            </div>
+
+            <!-- 객관식 버튼 -->
+            <div class="multiple-buttons" id="multipleButtons" style="display: none;">
+                <button class="option-btn" onclick="checkAnswer(0)">
+                    <span class="option-number">1</span>
+                    <span class="option-text"></span>
+                </button>
+                <button class="option-btn" onclick="checkAnswer(1)">
+                    <span class="option-number">2</span>
+                    <span class="option-text"></span>
+                </button>
+                <button class="option-btn" onclick="checkAnswer(2)">
+                    <span class="option-number">3</span>
+                    <span class="option-text"></span>
+                </button>
+                <button class="option-btn" onclick="checkAnswer(3)">
+                    <span class="option-number">4</span>
+                    <span class="option-text"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div class="result-screen" id="resultScreen">
+            <h2>퀴즈 완료!</h2>
+            <div class="result-emoji" id="resultEmoji">🎉</div>
+            <div class="result-score" id="resultScore">100점</div>
+            <div class="result-message" id="resultMessage">완벽해요!</div>
+
+            <div class="result-stats">
+                <div class="stat-box correct">
+                    <div class="number" id="correctCount">0</div>
+                    <div class="label">맞힌 문제</div>
+                </div>
+                <div class="stat-box wrong">
+                    <div class="number" id="wrongCount">0</div>
+                    <div class="label">틀린 문제</div>
+                </div>
+            </div>
+
+            <button class="restart-btn" onclick="restartQuiz()">다시 도전하기! 🔄</button>
+        </div>
+    </div>
+
+    <!-- 피드백 오버레이 -->
+    <div class="feedback-overlay" id="feedbackOverlay">
+        <div class="feedback-content">
+            <div class="feedback-emoji" id="feedbackEmoji">🎉</div>
+            <div class="feedback-text" id="feedbackText">정답이에요!</div>
+            <div class="feedback-answer" id="feedbackAnswer"></div>
+        </div>
+    </div>
+
+    <script>
+        // 퀴즈 데이터
+        const quizData = {
+            "title": "2025 환경드림 기출문제",
+            "total": 30,
+            "questions": [
+                { "id": 1, "type": "OX", "question": "일회용품 줄이기 활동이다.", "answer": "O" },
+                { "id": 2, "type": "OX", "question": "비닐봉투를 재사용하는 것도 환경 보호이다.", "answer": "O" },
+                { "id": 3, "type": "OX", "question": "쓰다 버린 건전지는 일반 쓰레기이다.", "answer": "X" },
+                { "id": 4, "type": "OX", "question": "종이컵 대신 텀블러를 사용하면 환경에 도움이 된다.", "answer": "O" },
+                { "id": 5, "type": "OX", "question": "분리배출을 하면 쓰레기가 모두 재활용된다.", "answer": "X" },
+                { "id": 6, "type": "OX", "question": "유리병은 깨끗이 씻어서 분리배출해야 한다.", "answer": "O" },
+                { "id": 7, "type": "OX", "question": "재활용 쓰레기를 태우는 것은 환경에 좋다.", "answer": "X" },
+                { "id": 8, "type": "OX", "question": "음식물 쓰레기는 물기를 최대한 제거하고 버린다.", "answer": "O" },
+                { "id": 9, "type": "OX", "question": "플라스틱은 자연에서 쉽게 분해된다.", "answer": "X" },
+                { "id": 10, "type": "OX", "question": "재활용이 어려운 쓰레기는 줄이는 것이 중요하다.", "answer": "O" },
+                { "id": 11, "type": "MULTIPLE", "question": "재활용이 어려운 것은 무엇일까요?", "options": ["종이컵", "페트병", "알루미늄 캔", "유리병"], "answer": 0 },
+                { "id": 12, "type": "MULTIPLE", "question": "음식물 쓰레기를 줄이는 방법으로 알맞은 것은?", "options": ["남기지 않고 먹는다", "물에 씻어 버린다", "비닐에 담아 버린다", "아무렇게나 버린다"], "answer": 0 },
+                { "id": 13, "type": "MULTIPLE", "question": "환경을 지키는 행동은 무엇일까요?", "options": ["물을 계속 틀어 놓기", "불필요한 전기 사용하기", "쓰지 않는 전등 끄기", "쓰레기 아무 데나 버리기"], "answer": 2 },
+                { "id": 14, "type": "MULTIPLE", "question": "플라스틱 빨대 대신 사용할 수 있는 것은?", "options": ["플라스틱 빨대", "종이 빨대", "비닐 빨대", "일회용 빨대"], "answer": 1 },
+                { "id": 15, "type": "MULTIPLE", "question": "지구 온난화의 원인으로 알맞은 것은?", "options": ["나무 심기", "온실가스 증가", "재활용 실천", "에너지 절약"], "answer": 1 },
+                { "id": 16, "type": "MULTIPLE", "question": "환경 보호를 위해 우리가 할 수 없는 것은?", "options": ["쓰레기 줄이기", "재활용하기", "물 낭비하기", "대중교통 이용하기"], "answer": 2 },
+                { "id": 17, "type": "MULTIPLE", "question": "에너지를 절약하는 행동은?", "options": ["냉장고 문 오래 열어두기", "사용하지 않는 전기 끄기", "물 계속 틀어두기", "난방 온도 높이기"], "answer": 1 },
+                { "id": 18, "type": "MULTIPLE", "question": "쓰레기를 줄이는 방법이 아닌 것은?", "options": ["재사용하기", "재활용하기", "필요 없는 물건 사기", "아껴 쓰기"], "answer": 2 },
+                { "id": 19, "type": "MULTIPLE", "question": "자연을 보호하는 행동으로 알맞은 것은?", "options": ["나무를 함부로 자르기", "동물을 괴롭히기", "쓰레기 되가져오기", "물 오염시키기"], "answer": 2 },
+                { "id": 20, "type": "MULTIPLE", "question": "환경 보호의 중요성으로 알맞은 것은?", "options": ["자연 파괴를 막기 위해", "쓰레기를 늘리기 위해", "에너지를 낭비하기 위해", "환경을 더럽히기 위해"], "answer": 0 },
+                { "id": 21, "type": "MULTIPLE", "question": "종이컵 대신 사용할 수 있는 것은?", "options": ["일회용 컵", "텀블러", "비닐컵", "플라스틱 컵"], "answer": 1 },
+                { "id": 22, "type": "MULTIPLE", "question": "일반 쓰레기로 버려야 하는 것은?", "options": ["캔", "페트병", "종이팩", "깨진 거울"], "answer": 3 },
+                { "id": 23, "type": "MULTIPLE", "question": "음식물 쓰레기가 될 수 없는 것은?", "options": ["과일 껍질", "남은 밥", "비닐봉지", "채소 껍질"], "answer": 2 },
+                { "id": 24, "type": "MULTIPLE", "question": "쓰레기를 줄이기 위해 올바른 행동은?", "options": ["물을 계속 틀어 놓는다", "장바구니를 사용한다", "일회용품을 많이 쓴다", "쓰레기를 아무 데나 버린다"], "answer": 1 },
+                { "id": 25, "type": "MULTIPLE", "question": "재활용이 가능한 것은 무엇일까요?", "options": ["비닐봉투", "플라스틱 병", "음식물 쓰레기", "휴지"], "answer": 1 },
+                { "id": 26, "type": "MULTIPLE", "question": "비닐봉투를 줄이는 방법은?", "options": ["더 많이 사용한다", "장바구니를 사용한다", "버린다", "찢는다"], "answer": 1 },
+                { "id": 27, "type": "MULTIPLE", "question": "분리배출이 필요한 이유는?", "options": ["쓰레기를 늘리기 위해", "재활용을 하기 위해", "냄새를 줄이기 위해", "보기 좋게 하기 위해"], "answer": 1 },
+                { "id": 28, "type": "MULTIPLE", "question": "다음 중 재활용이 어려운 것은?", "options": ["종이", "플라스틱", "음식물", "유리"], "answer": 2 },
+                { "id": 29, "type": "MULTIPLE", "question": "지구를 보호하는 행동은?", "options": ["자동차 많이 타기", "나무 심기", "전기 낭비하기", "물 오염시키기"], "answer": 1 },
+                { "id": 30, "type": "MULTIPLE", "question": "환경 보호를 위해 가장 필요한 것은?", "options": ["자연을 아끼는 마음", "쓰레기를 많이 버리는 행동", "물과 전기를 낭비하는 습관", "관심을 갖지 않는 태도"], "answer": 0 }
+            ]
+        };
+
+        // 게임 상태
+        let shuffledQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let wrongAnswers = 0;
+        let isAnswering = false;
+
+        // 오디오 컨텍스트 (효과음용)
+        let audioContext;
+
+        function initAudio() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        function playSound(type) {
+            if (!audioContext) initAudio();
+
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            if (type === 'correct') {
+                // 정답 효과음: 상승하는 음
+                oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+                oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.4);
+            } else {
+                // 오답 효과음: 하강하는 음
+                oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+                oscillator.frequency.setValueAtTime(200, audioContext.currentTime + 0.2);
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            }
+        }
+
+        function playFanfare() {
+            if (!audioContext) initAudio();
+
+            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+
+            notes.forEach((freq, i) => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.setValueAtTime(freq, audioContext.currentTime + i * 0.15);
+                gainNode.gain.setValueAtTime(0.2, audioContext.currentTime + i * 0.15);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + i * 0.15 + 0.3);
+
+                oscillator.start(audioContext.currentTime + i * 0.15);
+                oscillator.stop(audioContext.currentTime + i * 0.15 + 0.3);
+            });
+        }
+
+        // 배열 섞기 (Fisher-Yates 알고리즘)
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startQuiz() {
+            initAudio();
+            shuffledQuestions = shuffleArray(quizData.questions);
+            currentIndex = 0;
+            score = 0;
+            correctAnswers = 0;
+            wrongAnswers = 0;
+
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+            document.getElementById('resultScreen').style.display = 'none';
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = shuffledQuestions[currentIndex];
+
+            // 진행률 업데이트
+            const progress = ((currentIndex) / shuffledQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            // 문제 번호 및 점수
+            document.getElementById('questionNumber').textContent = `${currentIndex + 1} / ${shuffledQuestions.length}`;
+            document.getElementById('scoreDisplay').textContent = `점수: ${score}`;
+
+            // 문제 타입
+            document.getElementById('questionType').textContent = question.type === 'OX' ? 'OX 퀴즈' : '4지선다';
+
+            // 문제 텍스트
+            document.getElementById('questionText').textContent = question.question;
+
+            // 버튼 표시 전환
+            if (question.type === 'OX') {
+                document.getElementById('oxButtons').style.display = 'flex';
+                document.getElementById('multipleButtons').style.display = 'none';
+            } else {
+                document.getElementById('oxButtons').style.display = 'none';
+                document.getElementById('multipleButtons').style.display = 'grid';
+
+                // 선택지 텍스트 업데이트
+                const optionTexts = document.querySelectorAll('.option-text');
+                question.options.forEach((option, index) => {
+                    optionTexts[index].textContent = option;
+                });
+            }
+        }
+
+        function checkAnswer(userAnswer) {
+            if (isAnswering) return;
+            isAnswering = true;
+
+            const question = shuffledQuestions[currentIndex];
+            const isCorrect = userAnswer === question.answer;
+
+            const overlay = document.getElementById('feedbackOverlay');
+            const emoji = document.getElementById('feedbackEmoji');
+            const text = document.getElementById('feedbackText');
+            const answerText = document.getElementById('feedbackAnswer');
+
+            if (isCorrect) {
+                score += Math.round(100 / shuffledQuestions.length);
+                correctAnswers++;
+
+                overlay.className = 'feedback-overlay correct';
+                emoji.textContent = ['🎉', '👏', '⭐', '🌟', '💚'][Math.floor(Math.random() * 5)];
+                text.textContent = ['정답이에요!', '잘했어요!', '훌륭해요!', '멋져요!', '최고예요!'][Math.floor(Math.random() * 5)];
+                answerText.textContent = '';
+
+                playSound('correct');
+            } else {
+                wrongAnswers++;
+
+                overlay.className = 'feedback-overlay wrong';
+                emoji.textContent = ['😢', '💪', '🤔'][Math.floor(Math.random() * 3)];
+                text.textContent = ['아쉬워요!', '다음엔 맞춰봐요!', '괜찮아요!'][Math.floor(Math.random() * 3)];
+
+                // 정답 표시
+                if (question.type === 'OX') {
+                    answerText.textContent = `정답은 "${question.answer}" 이에요`;
+                } else {
+                    answerText.textContent = `정답은 "${question.options[question.answer]}" 이에요`;
+                }
+
+                playSound('wrong');
+            }
+
+            overlay.style.display = 'flex';
+
+            // 다음 문제로 이동
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                isAnswering = false;
+
+                currentIndex++;
+                if (currentIndex < shuffledQuestions.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1500);
+        }
+
+        function showResult() {
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'block';
+
+            const finalScore = Math.round((correctAnswers / shuffledQuestions.length) * 100);
+            document.getElementById('resultScore').textContent = finalScore + '점';
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('wrongCount').textContent = wrongAnswers;
+
+            let emoji, message;
+            if (finalScore >= 90) {
+                emoji = '🏆';
+                message = '환경 박사예요! 정말 대단해요!';
+            } else if (finalScore >= 70) {
+                emoji = '🌟';
+                message = '잘했어요! 환경을 잘 알고 있네요!';
+            } else if (finalScore >= 50) {
+                emoji = '💪';
+                message = '좋아요! 조금 더 연습해봐요!';
+            } else {
+                emoji = '🌱';
+                message = '괜찮아요! 다시 도전해봐요!';
+            }
+
+            document.getElementById('resultEmoji').textContent = emoji;
+            document.getElementById('resultMessage').textContent = message;
+
+            playFanfare();
+        }
+
+        function restartQuiz() {
+            document.getElementById('resultScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
