@@ -122,7 +122,6 @@ function showQuestion() {
     document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
 
     // 힌트 리셋
-    document.getElementById('hintBtn').disabled = false;
     document.getElementById('hintBtn').textContent = '힌트 보기 💡';
     document.getElementById('hintText').classList.remove('show');
     document.getElementById('hintText').textContent = '';
@@ -143,16 +142,22 @@ function showQuestion() {
     }
 }
 
-function showHint() {
+function toggleHint() {
     const question = shuffledQuestions[currentIndex];
     const hintBtn = document.getElementById('hintBtn');
     const hintText = document.getElementById('hintText');
 
-    if (question.hint) {
+    if (!question.hint) return;
+
+    if (hintText.classList.contains('show')) {
+        // 힌트 닫기
+        hintText.classList.remove('show');
+        hintBtn.textContent = '힌트 보기 💡';
+    } else {
+        // 힌트 보기
         hintText.textContent = question.hint;
         hintText.classList.add('show');
-        hintBtn.disabled = true;
-        hintBtn.textContent = '힌트 사용됨 ✓';
+        hintBtn.textContent = '힌트 닫기 ✕';
     }
 }
 

@@ -166,13 +166,6 @@ body {
     transform: scale(0.95);
 }
 
-.hint-btn:disabled {
-    background: #ccc;
-    box-shadow: none;
-    cursor: default;
-    transform: none;
-}
-
 .hint-text {
     margin-top: 15px;
     padding: 15px 20px;
